@@ -1,0 +1,66 @@
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;string&gt;
+using namespace std;
+const int r = 3, c = 3;
+void printBoard(const vector&lt;string&gt;&amp; board) {
+cout &lt;&lt; &quot; 0 1 2\n&quot;;
+for (int i = 0; i &lt; r; ++i) {
+cout &lt;&lt; i &lt;&lt; &quot; &quot;;
+for (int j = 0; j &lt; c; ++j) {
+cout &lt;&lt; board[i][j] &lt;&lt; &quot; &quot;;
+}
+cout &lt;&lt; endl;
+}
+}
+bool checkWin(const vector&lt;string&gt;&amp; board, char player)
+{
+// рядтары
+for (int i = 0; i &lt; r; ++i) {
+if (board[i][0] == player &amp;&amp; board[i][1] == player
+&amp;&amp; board[i][2] == player) {
+return true;
+}
+}
+// баганалары
+
+for (int i = 0; i &lt; c; ++i) {
+if (board[0][i] == player &amp;&amp; board[1][i] == player
+&amp;&amp; board[2][i] == player) {
+return true;
+}
+}
+// диагональдары
+if (board[0][0] == player &amp;&amp; board[1][1] == player &amp;&amp;
+board[2][2] == player) {
+return true;
+}
+if (board[0][2] == player &amp;&amp; board[1][1] == player &amp;&amp;
+board[2][0] == player) {
+return true;
+}
+return false;
+}
+int main() {
+vector&lt;string&gt; board = {
+&quot;___&quot;,
+&quot;___&quot;,
+&quot;___&quot;
+};
+char currentPlayer = &#39;X&#39;;
+while (true) {
+printBoard(board);
+
+int ro, co;
+cout&lt;&lt; currentPlayer ;
+cin &gt;&gt; ro &gt;&gt; co;
+board[ro][co] = currentPlayer;
+if (checkWin(board, currentPlayer)) {
+printBoard(board);
+cout &lt;&lt; currentPlayer &lt;&lt; &quot; жеңді&quot; &lt;&lt;endl;
+break;
+}
+currentPlayer = (currentPlayer == &#39;X&#39;) ? &#39;O&#39; : &#39;X&#39;;
+}
+return 0;
+}
